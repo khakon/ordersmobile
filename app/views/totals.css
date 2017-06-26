@@ -1,0 +1,13 @@
+﻿.total-name{
+    float:left;
+    width:45%;
+    font-style:italic;
+}
+.total-sum{
+    float:right;
+    width:10%;
+    margin: 0px 2px; /* Поля вокруг текста */
+}
+.total{
+    border-bottom: 1px solid black;
+}

@@ -1,0 +1,34 @@
+﻿<div data-options="dxView : { name: 'OrderItems', title: 'Заказ', disableCache: true } ">
+    <!--<div data-bind="dxCommand: { id: 'create', onExecute: completeOrder, title: 'Записать', icon: 'save' } "></div>-->
+
+    <div id="order-items" data-options="dxContent : { targetPlaceholder: 'content' } " data-bind="dxDeferRendering: { showLoadIndicator: true, animation: 'view-content-rendered' }">
+        <div data-bind="dxScrollView: {}">
+            <div class="order-info-container">
+                <div class="label-order">Итого:</div>
+                <div class="dx-fieldset-order" data-bind="text: total"></div>
+                <div class="clear"></div>
+                <div class="dx-fieldset">
+                    <table class="items-completing" data-bind="foreach: orderItems">
+                        <tr class="item-template">
+                            <td class="item-name">
+                                <div data-bind="text: Name, dxAction: $root.setCurrent"></div>
+                            </td>
+                            <td class="item-quant">
+                                <div data-bind="text: quantity"></div>
+                            </td>
+                            <td class="item-price">
+                                <div data-bind="text: price"></div>
+                            </td>
+                            <td class="item-sum">
+                                <div data-bind="text: sum"></div>
+                            </td>
+                            <td class="item-delete">
+                                <div data-bind="dxButton: { icon: 'clear', onClick: $parent.deleteItem }"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

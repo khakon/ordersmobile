@@ -1,0 +1,60 @@
+﻿<div data-options="dxView : { name: 'groups', title: 'Группы', disableCache: true  } ">
+    <div class="groups" data-options="dxContent : { targetPlaceholder: 'content' } ">
+        <div id="product-filters">
+            <div class="search-string" data-bind="dxTextBox: { placeholder: 'Поиск по названию', mode: 'search', value: searchString, valueChangeEvent: 'keyup' } "></div>
+            <div class="navigation" data-bind="if: visibleRoot">
+                  <span data-bind="dxButton: { icon: 'chevronup', onClick: root }" class="rootGroup"></span>
+            </div>
+            <div class="clear-search"></div>
+            <div data-bind="if: visibleRoot">
+                <span data-bind="dxButton: { icon: 'chevronleft', onClick: parent }"></span>
+            </div>
+        </div>
+        <div class="item" data-bind="dxList: { dataSource: items}">
+            <div data-bind="dxAction: $parent.setCurrent" data-options="dxTemplate : { name: 'item' } " class="groups-list">
+                <!-- ko if: group -->
+                <div class="folder">
+                    <div class="list-item-content" data-bind="text: Name"></div>
+                    <span class="my-folder"></span>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot: group -->
+                <div class="product">
+                    <div class="list-item-content" data-bind="text: Name"></div>
+                    <div class="balance" data-bind="text: Bal"></div>
+                    <span class="list-item-arrow"></span>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="popup" data-bind="dxPopup: popupOptions">
+            <div class="info" data-options="dxTemplate: { name:'title' }">
+                <span class="pop-up-title-product" data-bind="text: currentItem().Name"></span>
+            </div>
+            <div class="info" data-options="dxTemplate: { name:'product' }">
+                <div data-bind="with: currentItem">
+                    <div class="dx-fieldset">
+                    <div class="label-item">В упаковке</div>
+                    <div class="dx-fieldset-item" data-bind="text: Volume"></div>
+                    <div class="clear"></div>
+                    <div class="label-item">Цена справочник</div>
+                    <div class="dx-fieldset-item" data-bind="text: $parent.priceRef"></div>
+                    <div class="clear"></div>
+                    <div class="label-item">Цена прайс</div>
+                    <div class="dx-fieldset-item" data-bind="text: $parent.price"></div>
+                    <div class="clear"></div>
+                    <div class="label-item">Цена со скидкой</div>
+                    <div class="dx-fieldset-item" data-bind="text: $parent.priceDisc"></div>
+                    <div class="clear"></div>
+                    <div class="item-info" id="dateBox" data-bind="dxNumberBox: {value: $parent.quantity}"></div>
+                    <div class="quant">
+                        <div data-bind="dxButton: { text: 'Штуки', onClick: function(data,event){$parent.save(data,false,event);} }"></div>
+                        <div data-bind="dxButton: { text: 'Упак.', onClick: function(data,event){$parent.save(data,true,event);} }"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

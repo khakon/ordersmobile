@@ -1,0 +1,28 @@
+﻿<div data-options="dxView : { name: 'plans', title: 'Планы', disableCache: true } ">
+    <div data-options="dxContent : { targetPlaceholder: 'content' } ">
+        <!--<div class="label-pay">К оплате</div>
+        <div class="dx-fieldset-pay" data-bind="text: totalPay"></div>-->
+        <div class="plan head">
+            <div class="state in-progress"></div>
+            <div class="name">Назв</div>
+            <div class="sum plan-sale">План</div>
+            <div class="sum fact-sale">Факт</div>
+            <div class="sum percent">%</div>
+            <!--<div class="sum rate">Ставка</div>
+            <div class="sum pay">Опл</div>-->
+        </div>
+        <!-- ko foreach: plans -->
+            <div class="plan">
+                <div class="state" data-bind="css: { 'in-progress': !completed, 'completed': completed }"></div>
+                <div class="name" data-bind="text: name"></div>
+                <div class="sum plan-sale" data-bind="text: plan"></div>
+                <div class="sum fact-sale" data-bind="text: fact"></div>
+                <div class="sum percent" data-bind="text: percent"></div>
+                <!--<div class="sum rate" data-bind="text: rate"></div>
+                <div class="sum pay" data-bind="text: pay"></div>-->
+            </div>
+        <!-- /ko -->
+            <div class="clear"></div>
+        </div>
+    </div>
+

@@ -1,0 +1,28 @@
+﻿<div data-options="dxView : { name: 'historyItems', title: 'Заказ', disableCache: true } ">
+    <!--<div data-bind="dxCommand: { id: 'create', onExecute: completeOrder, title: 'Записать', icon: 'save' } "></div>-->
+
+    <div id="order-items" data-options="dxContent : { targetPlaceholder: 'content' } " data-bind="dxDeferRendering: { showLoadIndicator: true, animation: 'view-content-rendered' }">
+        <div data-bind="dxScrollView: {}">
+            <div class="order-info-container">
+                <div class="label-order">Итого:</div>
+                <div class="dx-fieldset-order" data-bind="text: total"></div>
+                <div class="clear"></div>
+                <div class="dx-fieldset">
+                    <table class="items-completing" data-bind="foreach: orderItems">
+                        <tr class="item-template">
+                            <td class="item-name history">
+                                <div data-bind="text: tov"></div>
+                            </td>
+                            <td class="item-quant">
+                                <div data-bind="text: quant"></div>
+                            </td>
+                            <td class="item-sum">
+                                <div data-bind="text: Math.round(suma*100)/100"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

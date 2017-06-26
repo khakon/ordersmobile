@@ -1,0 +1,845 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище OrdersModel" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="agents">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="agent" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="20" />
+          <Property Name="dep" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="balances">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="agent" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="customer" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="bal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="balDoc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="overdue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="payment" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Orders.dbo.Customers" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="id" />
+            
+            
+            
+            
+            
+            
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idAgent" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Agent" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idKontr" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kontr" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="adress" Type="varchar" MaxLength="250" />
+          <Property Name="DCredit" Type="int" Nullable="false" />
+          <Property Name="Credit" Type="decimal" Precision="38" Scale="5" />
+          <Property Name="TCredit" Type="decimal" Precision="38" Scale="5" />
+          <Property Name="dep" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ToPay" Type="decimal" Precision="38" Scale="5" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Orders.dbo.GoodsAgents" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="GoodsAgents">
+          <Key>
+            <PropertyRef Name="keys" />
+            
+            
+            
+            
+          </Key>
+          <Property Name="keys" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dep" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="group" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Orders.dbo.Groups" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="ParentId" Type="varchar" MaxLength="10" />
+          <Property Name="GroupId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="lev" Type="int" />
+          <Property Name="tree" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Orders.dbo.history" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="history">
+          <Key>
+            <PropertyRef Name="id" />
+            
+            
+            <PropertyRef Name="code" />
+            
+            
+            
+            
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="period" Type="smalldatetime" />
+          <Property Name="iddoc" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="docno" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="agent" Type="varchar" MaxLength="5" />
+          <Property Name="code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="kontr" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tov" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="quant" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="suma" Type="numeric" Precision="16" Scale="5" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Orders.dbo.Items" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ItemId" />
+            
+            
+          </Key>
+          <Property Name="ParentId" Type="varchar" MaxLength="10" />
+          <Property Name="ItemId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="lev" Type="int" />
+          <Property Name="Unit" Type="varchar" MaxLength="10" />
+          <Property Name="Pack" Type="varchar" MaxLength="4" />
+          <Property Name="Weight" Type="decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="Volume" Type="decimal" Precision="11" Scale="4" Nullable="false" />
+          <Property Name="Bal" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="barCode" Type="bigint" />
+          <Property Name="tree" Type="varchar" MaxLength="100" />
+          <Property Name="priceRef" Type="decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityType Name="logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="payment" Type="varchar" MaxLength="20" />
+          <Property Name="agent" Type="varchar" MaxLength="20" />
+          <Property Name="customer" Type="varchar" MaxLength="20" />
+          <Property Name="itemId" Type="varchar" MaxLength="20" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="price" Type="float" />
+          <Property Name="number" Type="int" />
+          <Property Name="timeStampServer" Type="datetime" />
+          <Property Name="timeStamp" Type="datetime" />
+          <Property Name="sum" Type="float" />
+          <Property Name="comment" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="logsString">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="agent" Type="varchar" MaxLength="20" />
+          <Property Name="content" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="payment" Type="varchar" MaxLength="20" />
+          <Property Name="agent" Type="varchar" MaxLength="20" />
+          <Property Name="customer" Type="varchar" MaxLength="20" />
+          <Property Name="itemId" Type="varchar" MaxLength="20" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="price" Type="float" />
+          <Property Name="number" Type="int" />
+          <Property Name="timeStamp" Type="datetime" />
+          <Property Name="sum" Type="float" />
+          <Property Name="comment" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Orders.dbo.Plans" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Plans">
+          <Key>
+            <PropertyRef Name="id" />
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="agent" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ware" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="select" Type="int" Nullable="false" />
+          <Property Name="planTT" Type="int" Nullable="false" />
+          <Property Name="planSale" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="planQuant" Type="numeric" Precision="14" Scale="3" Nullable="false" />
+          <Property Name="planWeight" Type="numeric" Precision="14" Scale="3" Nullable="false" />
+          <Property Name="rate" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="selectQuant" Type="int" Nullable="false" />
+          <Property Name="percExec" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="sale" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="quant" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Orders.dbo.PriceCustomers" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="PriceCustomers">
+          <Key>
+            <PropertyRef Name="id" />
+            
+            
+            
+            
+            
+            
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="wareId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="kntrId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="namePrice" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="idObj" Type="int" Nullable="false" />
+          <Property Name="objid" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Orders.dbo.PriceDiscounts" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="PriceDiscounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="wareId" Type="varchar" MaxLength="10" />
+          <Property Name="kntrId" Type="varchar" MaxLength="10" />
+          <Property Name="discount" Type="decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Orders.dbo.PriceRefs" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="PriceRefs">
+          <Key>
+            <PropertyRef Name="id" />
+            
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="wareId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Orders.dbo.Prices" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Prices">
+          <Key>
+            <PropertyRef Name="id" />
+            
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TovId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="KnId" Type="varchar" MaxLength="10" />
+          <Property Name="Price" Type="numeric" Precision="7" Scale="2" />
+          <Property Name="Discount" Type="numeric" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="Хранилище OrdersModelContainer">
+          <EntitySet Name="agents" EntityType="Self.agents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="balances" EntityType="Self.balances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="logs" EntityType="Self.logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="logsString" EntityType="Self.logsString" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Customers].[id] AS [id], 
+    [Customers].[idAgent] AS [idAgent], 
+    [Customers].[Agent] AS [Agent], 
+    [Customers].[idKontr] AS [idKontr], 
+    [Customers].[Kontr] AS [Kontr], 
+    [Customers].[adress] AS [adress], 
+    [Customers].[DCredit] AS [DCredit], 
+    [Customers].[Credit] AS [Credit], 
+    [Customers].[TCredit] AS [TCredit], 
+    [Customers].[dep] AS [dep], 
+    [Customers].[ToPay] AS [ToPay]
+    FROM [dbo].[Customers] AS [Customers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GoodsAgents" EntityType="Self.GoodsAgents" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GoodsAgents].[keys] AS [keys], 
+    [GoodsAgents].[id] AS [id], 
+    [GoodsAgents].[dep] AS [dep], 
+    [GoodsAgents].[group] AS [group], 
+    [GoodsAgents].[code] AS [code]
+    FROM [dbo].[GoodsAgents] AS [GoodsAgents]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Groups" EntityType="Self.Groups" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Groups].[ParentId] AS [ParentId], 
+    [Groups].[GroupId] AS [GroupId], 
+    [Groups].[Name] AS [Name], 
+    [Groups].[lev] AS [lev], 
+    [Groups].[tree] AS [tree]
+    FROM [dbo].[Groups] AS [Groups]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="history" EntityType="Self.history" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [history].[id] AS [id], 
+    [history].[period] AS [period], 
+    [history].[iddoc] AS [iddoc], 
+    [history].[docno] AS [docno], 
+    [history].[agent] AS [agent], 
+    [history].[code] AS [code], 
+    [history].[kontr] AS [kontr], 
+    [history].[tov] AS [tov], 
+    [history].[quant] AS [quant], 
+    [history].[suma] AS [suma]
+    FROM [dbo].[history] AS [history]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Items" EntityType="Self.Items" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Items].[ParentId] AS [ParentId], 
+    [Items].[ItemId] AS [ItemId], 
+    [Items].[Name] AS [Name], 
+    [Items].[lev] AS [lev], 
+    [Items].[Unit] AS [Unit], 
+    [Items].[Pack] AS [Pack], 
+    [Items].[Weight] AS [Weight], 
+    [Items].[Volume] AS [Volume], 
+    [Items].[Bal] AS [Bal], 
+    [Items].[barCode] AS [barCode], 
+    [Items].[tree] AS [tree], 
+    [Items].[priceRef] AS [priceRef]
+    FROM [dbo].[Items] AS [Items]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Plans" EntityType="Self.Plans" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Plans].[id] AS [id], 
+    [Plans].[agent] AS [agent], 
+    [Plans].[ware] AS [ware], 
+    [Plans].[select] AS [select], 
+    [Plans].[planTT] AS [planTT], 
+    [Plans].[planSale] AS [planSale], 
+    [Plans].[planQuant] AS [planQuant], 
+    [Plans].[planWeight] AS [planWeight], 
+    [Plans].[rate] AS [rate], 
+    [Plans].[selectQuant] AS [selectQuant], 
+    [Plans].[percExec] AS [percExec], 
+    [Plans].[sale] AS [sale], 
+    [Plans].[quant] AS [quant]
+    FROM [dbo].[Plans] AS [Plans]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PriceCustomers" EntityType="Self.PriceCustomers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PriceCustomers].[id] AS [id], 
+    [PriceCustomers].[wareId] AS [wareId], 
+    [PriceCustomers].[kntrId] AS [kntrId], 
+    [PriceCustomers].[namePrice] AS [namePrice], 
+    [PriceCustomers].[idObj] AS [idObj], 
+    [PriceCustomers].[objid] AS [objid], 
+    [PriceCustomers].[date] AS [date], 
+    [PriceCustomers].[price] AS [price]
+    FROM [dbo].[PriceCustomers] AS [PriceCustomers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PriceDiscounts" EntityType="Self.PriceDiscounts" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PriceDiscounts].[id] AS [id], 
+    [PriceDiscounts].[wareId] AS [wareId], 
+    [PriceDiscounts].[kntrId] AS [kntrId], 
+    [PriceDiscounts].[discount] AS [discount]
+    FROM [dbo].[PriceDiscounts] AS [PriceDiscounts]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PriceRefs" EntityType="Self.PriceRefs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PriceRefs].[id] AS [id], 
+    [PriceRefs].[wareId] AS [wareId], 
+    [PriceRefs].[price] AS [price]
+    FROM [dbo].[PriceRefs] AS [PriceRefs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Prices" EntityType="Self.Prices" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Prices].[id] AS [id], 
+    [Prices].[TovId] AS [TovId], 
+    [Prices].[KnId] AS [KnId], 
+    [Prices].[Price] AS [Price], 
+    [Prices].[Discount] AS [Discount]
+    FROM [dbo].[Prices] AS [Prices]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OrdersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="agents">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="agent" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dep" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idAgent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idKontr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Kontr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DCredit" Type="Int32" Nullable="false" />
+          <Property Name="Credit" Type="Decimal" Precision="38" Scale="5" />
+          <Property Name="TCredit" Type="Decimal" Precision="38" Scale="5" />
+          <Property Name="dep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ToPay" Type="Decimal" Precision="38" Scale="5" />
+        </EntityType>
+        <EntityType Name="GoodsAgent">
+          <Key>
+            <PropertyRef Name="keys" />
+          </Key>
+          <Property Name="keys" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dep" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="group" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="ParentId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GroupId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="lev" Type="Int32" />
+          <Property Name="tree" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ParentId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ItemId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="lev" Type="Int32" />
+          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Pack" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="Volume" Type="Decimal" Precision="11" Scale="4" Nullable="false" />
+          <Property Name="Bal" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="barCode" Type="Int64" />
+          <Property Name="tree" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="priceRef" Type="Decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityType Name="PriceCustomer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="wareId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kntrId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="namePrice" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="idObj" Type="Int32" Nullable="false" />
+          <Property Name="objid" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="price" Type="Decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityType Name="PriceDiscount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="wareId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="kntrId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="discount" Type="Decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityType Name="PriceRef">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="wareId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="OrdersEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="agents1" EntityType="OrdersModel.agents" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="GoodsAgents" EntityType="Self.GoodsAgent" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="PriceCustomers" EntityType="Self.PriceCustomer" />
+          <EntitySet Name="PriceDiscounts" EntityType="Self.PriceDiscount" />
+          <EntitySet Name="PriceRefs" EntityType="Self.PriceRef" />
+          <AssociationSet Name="ItemPriceRef" Association="OrdersModel.ItemPriceRef">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="PriceRef" EntitySet="PriceRefs" />
+          </AssociationSet>
+          <EntitySet Name="Prices" EntityType="OrdersModel.Price" />
+          <EntitySet Name="Orders" EntityType="OrdersModel.Order" />
+          <EntitySet Name="logs" EntityType="OrdersModel.log" />
+          <EntitySet Name="logsStrings" EntityType="OrdersModel.logsString" />
+          <EntitySet Name="Plans" EntityType="OrdersModel.Plan" />
+          <EntitySet Name="balances" EntityType="OrdersModel.balance" />
+          <EntitySet Name="histories" EntityType="OrdersModel.history" />
+        </EntityContainer>
+        <Association Name="ItemPriceRef">
+          <End Type="OrdersModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="OrdersModel.PriceRef" Role="PriceRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="PriceRef">
+              <PropertyRef Name="wareId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TovId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="KnId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Price1" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="payment" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="agent" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="customer" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="itemId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" />
+          <Property Name="number" Type="Int32" />
+          <Property Name="timeStamp" Type="DateTime" Precision="3" />
+          <Property Name="sum" Type="Double" />
+          <Property Name="comment" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="payment" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="agent" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="customer" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="itemId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" />
+          <Property Name="number" Type="Int32" />
+          <Property Name="timeStampServer" Type="DateTime" Precision="3" />
+          <Property Name="timeStamp" Type="DateTime" Precision="3" />
+          <Property Name="sum" Type="Double" />
+          <Property Name="comment" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="logsString">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="agent" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="agent" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ware" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="select" Type="Int32" Nullable="false" />
+          <Property Name="planTT" Type="Int32" Nullable="false" />
+          <Property Name="planSale" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="planQuant" Type="Decimal" Nullable="false" Precision="14" Scale="3" />
+          <Property Name="planWeight" Type="Decimal" Nullable="false" Precision="14" Scale="3" />
+          <Property Name="rate" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="selectQuant" Type="Int32" Nullable="false" />
+          <Property Name="percExec" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <Property Name="sale" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="quant" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+        </EntityType>
+        <EntityType Name="balance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="agent" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="customer" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="bal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="balDoc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="overdue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="payment" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="history">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="period" Type="DateTime" Precision="0" />
+          <Property Name="iddoc" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="docno" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="agent" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="kontr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tov" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="quant" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="suma" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище OrdersModelContainer" CdmEntityContainer="OrdersEntities">
+          <EntitySetMapping Name="agents1">
+            <EntityTypeMapping TypeName="OrdersModel.agents">
+              <MappingFragment StoreEntitySet="agents">
+                <ScalarProperty Name="dep" ColumnName="dep" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="agent" ColumnName="agent" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="OrdersModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idAgent" ColumnName="idAgent" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="idKontr" ColumnName="idKontr" />
+                <ScalarProperty Name="Kontr" ColumnName="Kontr" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="DCredit" ColumnName="DCredit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="TCredit" ColumnName="TCredit" />
+                <ScalarProperty Name="dep" ColumnName="dep" />
+                <ScalarProperty Name="ToPay" ColumnName="ToPay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoodsAgents">
+            <EntityTypeMapping TypeName="OrdersModel.GoodsAgent">
+              <MappingFragment StoreEntitySet="GoodsAgents">
+                <ScalarProperty Name="keys" ColumnName="keys" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dep" ColumnName="dep" />
+                <ScalarProperty Name="group" ColumnName="group" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="OrdersModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="lev" ColumnName="lev" />
+                <ScalarProperty Name="tree" ColumnName="tree" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="OrdersModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="priceRef" ColumnName="priceRef" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="lev" ColumnName="lev" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Pack" ColumnName="Pack" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Bal" ColumnName="Bal" />
+                <ScalarProperty Name="barCode" ColumnName="barCode" />
+                <ScalarProperty Name="tree" ColumnName="tree" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriceCustomers">
+            <EntityTypeMapping TypeName="OrdersModel.PriceCustomer">
+              <MappingFragment StoreEntitySet="PriceCustomers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="wareId" ColumnName="wareId" />
+                <ScalarProperty Name="kntrId" ColumnName="kntrId" />
+                <ScalarProperty Name="namePrice" ColumnName="namePrice" />
+                <ScalarProperty Name="idObj" ColumnName="idObj" />
+                <ScalarProperty Name="objid" ColumnName="objid" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriceDiscounts">
+            <EntityTypeMapping TypeName="OrdersModel.PriceDiscount">
+              <MappingFragment StoreEntitySet="PriceDiscounts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="wareId" ColumnName="wareId" />
+                <ScalarProperty Name="kntrId" ColumnName="kntrId" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriceRefs">
+            <EntityTypeMapping TypeName="OrdersModel.PriceRef">
+              <MappingFragment StoreEntitySet="PriceRefs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="wareId" ColumnName="wareId" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prices">
+            <EntityTypeMapping TypeName="OrdersModel.Price">
+              <MappingFragment StoreEntitySet="Prices">
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Price1" ColumnName="Price" />
+                <ScalarProperty Name="KnId" ColumnName="KnId" />
+                <ScalarProperty Name="TovId" ColumnName="TovId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="OrdersModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+                <ScalarProperty Name="timeStamp" ColumnName="timeStamp" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="customer" ColumnName="customer" />
+                <ScalarProperty Name="agent" ColumnName="agent" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="logs">
+            <EntityTypeMapping TypeName="OrdersModel.log">
+              <MappingFragment StoreEntitySet="logs">
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+                <ScalarProperty Name="timeStamp" ColumnName="timeStamp" />
+                <ScalarProperty Name="timeStampServer" ColumnName="timeStampServer" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="customer" ColumnName="customer" />
+                <ScalarProperty Name="agent" ColumnName="agent" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="logsStrings">
+            <EntityTypeMapping TypeName="OrdersModel.logsString">
+              <MappingFragment StoreEntitySet="logsString">
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="agent" ColumnName="agent" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plans">
+            <EntityTypeMapping TypeName="OrdersModel.Plan">
+              <MappingFragment StoreEntitySet="Plans">
+                <ScalarProperty Name="quant" ColumnName="quant" />
+                <ScalarProperty Name="sale" ColumnName="sale" />
+                <ScalarProperty Name="percExec" ColumnName="percExec" />
+                <ScalarProperty Name="selectQuant" ColumnName="selectQuant" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="planWeight" ColumnName="planWeight" />
+                <ScalarProperty Name="planQuant" ColumnName="planQuant" />
+                <ScalarProperty Name="planSale" ColumnName="planSale" />
+                <ScalarProperty Name="planTT" ColumnName="planTT" />
+                <ScalarProperty Name="select" ColumnName="select" />
+                <ScalarProperty Name="ware" ColumnName="ware" />
+                <ScalarProperty Name="agent" ColumnName="agent" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="balances">
+            <EntityTypeMapping TypeName="OrdersModel.balance">
+              <MappingFragment StoreEntitySet="balances">
+                <ScalarProperty Name="payment" ColumnName="payment" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="overdue" ColumnName="overdue" />
+                <ScalarProperty Name="balDoc" ColumnName="balDoc" />
+                <ScalarProperty Name="bal" ColumnName="bal" />
+                <ScalarProperty Name="customer" ColumnName="customer" />
+                <ScalarProperty Name="agent" ColumnName="agent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="histories">
+            <EntityTypeMapping TypeName="OrdersModel.history">
+              <MappingFragment StoreEntitySet="history">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="suma" ColumnName="suma" />
+                <ScalarProperty Name="quant" ColumnName="quant" />
+                <ScalarProperty Name="tov" ColumnName="tov" />
+                <ScalarProperty Name="kontr" ColumnName="kontr" />
+                <ScalarProperty Name="agent" ColumnName="agent" />
+                <ScalarProperty Name="docno" ColumnName="docno" />
+                <ScalarProperty Name="iddoc" ColumnName="iddoc" />
+                <ScalarProperty Name="period" ColumnName="period" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

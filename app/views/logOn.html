@@ -1,0 +1,18 @@
+<div data-options="dxView : { name: 'logOn', title: 'Вход', layout: 'empty', disableCache: true  } ">
+    <div id="start" data-options="dxContent : { targetPlaceholder: 'content' } " class="dx-content-background">
+        <!--<div class="logo"></div>-->
+        <div class="dx-fieldset">
+            <div class="dx-field">
+                <div class="dx-field-value login" data-bind="dxSelectBox: { dataSource: agents, displayExpr: 'agent', valueExpr: 'id', placeholder: 'Введите логин', value: agentId, itemTemplate: 'loginTemplate' }">
+                    <div data-options="dxTemplate:{ name:'loginTemplate' }" class="login-item" data-bind="text: agent"></div>
+                </div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-value pass" data-bind="dxTextBox: { placeholder: 'Введите пароль', mode: 'password', value: passwordForId }"></div>
+            </div>
+        </div>
+
+        <div class="get-to-work" data-bind="dxButton: { onClick: goPage, text: 'Вход' }"></div>
+    </div>
+</div>
+

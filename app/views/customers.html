@@ -1,0 +1,20 @@
+﻿<div data-options="dxView : { name: 'customers', title: 'Покупатели', disableCache: true  } ">
+    <div class="customers" data-options="dxContent : { targetPlaceholder: 'content' } ">
+        <div id="product-filters">
+            <div class="search-string" data-bind="dxTextBox: { placeholder: 'Поиск по названию клиента', mode: 'search', value: searchString, valueChangeEvent: 'keyup' } "></div>
+            <div class="navigation">
+                <span data-bind="dxButton: { icon: 'upload', onClick: loadPrices }"></span>
+            </div>
+            <div class="clear-search"></div>
+        </div>
+        <div data-bind="dxLoadPanel: {closeOnOutsideClick: true, visible: isLoadPrice}"></div>
+        <div data-bind="dxList: { dataSource: customers, visible: !isLoadPrice()}">
+            <div data-bind="dxAction: $root.selectCustomer" data-options="dxTemplate : { name: 'item' } " class="customer">
+                <div class="list-item-content">
+                    <span data-bind="text: Kontr"></span><br />
+                </div>
+                <div class="list-item-arrow"></div>
+            </div>
+        </div>
+    </div>
+</div>

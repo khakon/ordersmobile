@@ -1,0 +1,46 @@
+﻿<div data-options="dxView : { name: 'customerDetails', title: 'Заказ', disableCache: true } ">
+    <div class="customer-details" data-options="dxContent : { targetPlaceholder: 'content' } " data-bind="dxDeferRendering: { showLoadIndicator: true, animation: 'view-content-rendered' }">
+        <div data-bind="dxScrollView: {}">
+            <div data-bind="with: currentCustomer" class="customer-detail">
+                <div class="dx-fieldset">
+                    <div class="date-info" id="dateBox" data-bind="dxDateBox: $parent.dateFormat"></div>
+                    <div class="main-customer-info">
+                        <div class="full-name">
+                            <span data-bind="text: Kontr"></span>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="flex">
+                    <div class="flex-item">
+                        <div class="label-order">Номер заказа</div>
+                        <div class="dx-fieldset-order" data-bind="text: $parent.number"></div>
+                        <div class="clear"></div>
+                        <div class="label-order">Вид оплаты</div>
+                        <div class="dx-fieldset-order" data-bind="text: $parent.payment"></div>
+                        <div class="clear"></div>
+                        <div class="label-order">Отсрочка</div>
+                        <div class="dx-fieldset-order" data-bind="text: DCredit"></div>
+                        <div class="clear"></div>
+                        <div class="label-order">Долг</div>
+                        <div class="dx-fieldset-order" data-bind="text: Credit"></div>
+                        <div class="clear"></div>
+                        <div class="label-order">Просрочка</div>
+                        <div class="dx-fieldset-order" data-bind="text: TCredit"></div>
+                        <div class="clear"></div>
+                        <div class="label-order">Адрес</div>
+                        <div class="dx-fieldset-order" data-bind="text: adress"></div>
+                        <div class="clear"></div>
+                        <div class="label">Комментарий</div>
+                        <div class="dx-fieldset" data-bind="dxTextBox:  { placeholder: 'Комментарий' , value: $parent.comment}"></div>
+                    </div>
+                    <div class="flex-item customer-detaile-button">
+                            <div data-bind="dxButton: { text: 'Записать', onClick: $parent.saveOrder }"></div>
+                            <div data-bind="dxButton: { text: 'Выйти', onClick: $parent.exitOrder }"></div>
+                            <div data-bind="dxButton: { text: 'Удалить', onClick: $parent.deleteOrder },visible:!$parent.save()"></div>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+﻿<div data-options="dxView : { name: 'totals', title: 'Итоги', disableCache: true } ">
+    <div class="customer-details" data-options="dxContent : { targetPlaceholder: 'content' } " data-bind="dxDeferRendering: { showLoadIndicator: true, animation: 'view-content-rendered' }">
+                <div class="label-order">Итого</div>
+            <div class="dx-fieldset-order" data-bind="text: totalOrders"></div>
+        <div class="navigation" data-bind="if: checkRoot()">
+            <span data-bind="dxButton: { icon: 'chevronleft', onClick: parent }"></span>
+            <span data-bind="dxButton: { icon: 'chevronup', onClick: root }"></span>
+        </div>
+                <div class="clear"></div>
+        <div class="total" data-bind="dxList: { dataSource: groups}">
+            <div data-bind="dxAction: $parent.setCurrent" data-options="dxTemplate : { name: 'item' } " class="customer">
+                <div class="total-name">
+                    <span data-bind="text: Name"></span><br />
+                </div>
+                <div class="total-sum">
+                    <span data-bind="text: sum"></span><br />
+                </div>
+                <!--<div><span class="list-item-arrow"></span></div>-->
+            </div>
+        </div>
+        <!--<div class="orders" data-bind="dxList: { dataSource: groups, pullRefreshEnabled: true}">
+            <div data-bind="dxAction: $parent.setCurrent"  data-options="dxTemplate : { name: 'item' } " class="order">
+                <div class="order-customer">
+                    <span data-bind="text:Name"></span>
+                </div>
+                <div class="order-total" data-bind="text: sum"></div>
+            </div>
+            <div class="clear"></div>
+        </div>-->
+    </div>
+</div>

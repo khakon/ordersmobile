@@ -1,0 +1,36 @@
+﻿<div data-options="dxView : { name: 'orders', title: 'Заказы', disableCache: true } ">
+    <div data-bind="dxCommand: { id: 'create', onExecute: saveAll, icon: 'save'} "></div>
+    <div data-bind="dxCommand: { id: 'save', onExecute: deleteAll, icon: 'remove'} "></div>
+    <div data-bind="dxCommand: { id: 'edit', onExecute: selectTotals, icon: 'card'} "></div>
+    <div data-options="dxContent : { targetPlaceholder: 'content' } ">
+        <div id="product-filters">
+            <div data-bind="dxTextBox: { placeholder: 'Поиск по названию клиента', mode: 'search', value: searchString, valueChangeEvent: 'keyup' } "></div>
+        </div>
+        <div data-bind="dxPopover: { width: 200, visible: showSelectTotals, target: '.dx-active-view .dx-button' }">
+            <div class="select-list" data-bind="dxAction:'#totals/0'">
+                Итоги
+            </div>
+            <div class="select-list" data-bind="dxAction:'#plans'">
+                Планы
+            </div>
+        </div>
+        <div data-bind="dxLoadPanel: {closeOnOutsideClick: true, visible: isSaveOrders}"></div>
+        <div class="orders" data-bind="dxList: { dataSource: orders, pullRefreshEnabled: true}">
+            <div data-options="dxTemplate : { name: 'item' } " class="order" data-bind="dxAction: $parent.selectOrder">
+                <div class="state" data-bind="css: { 'new': !save, 'completed': save }"></div>
+                <div class="date" data-bind="text:dateStr, dxAction: $root.filterDate"></div>
+                <div class="number" data-bind="text: number"></div>
+                <div class="info">
+                        <div class="customer" data-bind="with: customer">
+                            <span data-bind="text:Kontr"></span>
+                        </div>
+                        <div class="payment" data-bind="text: payment"></div>
+                </div>
+                <div class="sum" data-bind="text: total"></div>
+                <div class="arrow"></div>
+            </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+

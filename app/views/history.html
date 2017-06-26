@@ -1,0 +1,15 @@
+﻿<div data-options="dxView : { name: 'history', title: 'Заказы', disableCache: true } ">
+    <div data-options="dxContent : { targetPlaceholder: 'content' } ">
+        <div class="label-order history" data-bind="text: kontr"></div>
+         <div class="orders" data-bind="dxList: { dataSource: orders, pullRefreshEnabled: true}">
+            <div data-options="dxTemplate : { name: 'item' } " class="order" data-bind="dxAction: $root.select">
+                <div class="state" data-bind="css: 'completed'"></div>
+                <div class="date" data-bind="text:dateStr"></div>
+                <div class="sum" data-bind="text: suma"></div>
+                <div class="arrow history"></div>
+            </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+

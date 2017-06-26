@@ -1,0 +1,23 @@
+﻿.customers .list-item-content {
+    margin-left: 20px;
+    margin-right: 20px;
+    overflow: hidden;
+    -moz-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.customer {
+    position: relative;
+}
+.dx-overlay-content .dx-button .dx-button-content {
+    padding-right: 5px;
+    padding-left: 8px;
+}
+.dx-popup-bottom .dx-button {
+    min-width: 50px;
+}
+
+

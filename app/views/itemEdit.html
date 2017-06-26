@@ -1,0 +1,36 @@
+﻿<div data-options="dxView : { name: 'itemEdit', title: 'Товар', disableCache: true } ">
+    <div class="customer-details" data-options="dxContent : { targetPlaceholder: 'content' } " data-bind="dxDeferRendering: { showLoadIndicator: true, animation: 'view-content-rendered' }">
+        <div data-bind="dxScrollView: {}">
+            <div data-bind="with: currentItem">
+                <div class="dx-fieldset">
+                    <div class="item-info" id="dateBox" data-bind="dxNumberBox: {value: $parent.quantity}"></div>
+                    <div class="main-item-info">
+                        <div class="full-name">
+                            <div data-bind="dxButton: { text: 'Штуки', onClick: function(data,event){$parent.save(data,false,event);} }"></div>
+                            <div data-bind="dxButton: { text: 'Упак.', onClick: function(data,event){$parent.save(data,true,event);} }"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="label">Товар</div>
+                <div class="dx-fieldset" data-bind="text: Name"></div>
+                <div class="label-item">В упаковке</div>
+                <div class="dx-fieldset-item" data-bind="text: Volume"></div>
+                <div class="clear"></div>
+                <div class="label-item">Цена справочник</div>
+                <div class="dx-fieldset-item" data-bind="text: $parent.priceRef"></div>
+                <div class="clear"></div>
+                <div class="label-item">Цена прайс</div>
+                <div class="dx-fieldset-item" data-bind="text: $parent.price"></div>
+                <div class="clear"></div>
+                <div class="label-item">Цена со скидкой</div>
+                <div class="dx-fieldset-item" data-bind="text: $parent.priceDisc"></div>
+                <div class="clear"></div>
+                <!--<div class="dx-fieldset">
+                    <div data-bind="dxButton: { text: 'Записать', onClick: $parent.saveOrder }"></div>
+                    <div data-bind="dxButton: { text: 'Удалить', onClick: $parent.deleteOrder }"></div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>

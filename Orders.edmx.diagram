@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="63b1c054a78a46c59501c2765e783624" Name="Diagram1">
+        <EntityTypeShape EntityType="OrdersModel.agents" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrdersModel.Customer" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrdersModel.GoodsAgent" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrdersModel.Group" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrdersModel.Item" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrdersModel.PriceCustomer" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrdersModel.PriceDiscount" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrdersModel.PriceRef" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="OrdersModel.ItemPriceRef" />
+        <EntityTypeShape EntityType="OrdersModel.Price" Width="1.5" PointX="8.75" PointY="0.875" />
+        <EntityTypeShape EntityType="OrdersModel.Order" Width="1.5" PointX="8.75" PointY="3.875" />
+        <EntityTypeShape EntityType="OrdersModel.log" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="OrdersModel.logsString" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="OrdersModel.Plan" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="OrdersModel.balance" Width="1.5" PointX="10.5" PointY="4" />
+        <EntityTypeShape EntityType="OrdersModel.history" Width="1.5" PointX="12.375" PointY="3.875" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
